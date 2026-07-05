@@ -60,16 +60,25 @@ func maxChunks(data []int) (int, error) {
 		}
 		start = localEnd
 
-		go func() {
+		go func() error {
 			defer wg.Done()
 
-			max := slices.Max(data[localStart:localEnd])
+			max, err := maximum(data[localStart:localEnd])
+			if err != nil {
+				return errors.New("number search error")
+
+			}
 			cutSlice[i] = max
+			return nil
 		}()
 	}
 
 	wg.Wait()
-	return slices.Max(cutSlice), nil
+	max2, err := maximum(cutSlice)
+	if err != nil {
+		return 0, errors.New("number search error")
+	}
+	return max2, nil
 }
 
 func main() {
