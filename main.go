@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"math/rand/v2"
-	"slices"
 	"sync"
 	"time"
 )
@@ -31,7 +30,15 @@ func maximum(data []int) (int, error) {
 	if len(data) == 0 {
 		return 0, errors.New("the slice length is 0")
 	}
-	max := slices.Max(data)
+
+	max := 0
+
+	for _, w := range data {
+		if w > max {
+			max = w
+		}
+	}
+
 	return max, nil
 }
 
