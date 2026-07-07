@@ -31,7 +31,7 @@ func maximum(data []int) (int, error) {
 		return 0, errors.New("the slice length is 0")
 	}
 
-	max := 0
+	max := data[0]
 
 	for _, w := range data {
 		if w > max {
